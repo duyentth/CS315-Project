@@ -1,4 +1,5 @@
-export class User {
+//export
+ class User {
     constructor(fname, lname, email, phone = "", address = "", password, isManager = false) {
         this.fname = fname;
         this.lname = lname;
@@ -17,5 +18,13 @@ let manager2 = new User('Sharada', 'Khatiwada', 'sharada.khatiwada@miu.edu', '44
 let user1 = new User('Ruby', 'Le', 'ruby.le@miu.edu', '4133013668',
 "R13 Granville St", "HelloGirls@123", false);
 
-export let users = [user1, manager1, manager2];
+//export let users = [user1, manager1, manager2];
 
+ function showListUsers() {
+    let myP = document.querySelector("#list");
+    let mystr = "";
+    for ( let user of users) {
+        mystr += user.fname + " ";
+    }
+    myP.innerHTML = mystr;
+ }
