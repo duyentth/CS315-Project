@@ -1,10 +1,11 @@
-import { User, users } from "./user.js";
+import { User, initData, addUser } from "./user.js";
 
 //document.querySelector("#firstName").focus();
-
-
+initData();
+console.log("here",localStorage.getItem("userList"));
 //Add eventlistener to Email field
 let userEmail = document.querySelector("#email");
+
 userEmail.addEventListener("focusout", validateEmail);
 userEmail.addEventListener("keydown", clearErrorMsg);
 
@@ -84,14 +85,12 @@ function validateRepPassword() {
     if (password != repPassword) {
         clearErrorMsg();
         showErrorMsg("Your password doesn't match.");
-        //document.querySelector("#retypepassword").focus();
+        document.querySelector("#retypepassword").focus();
     }
 }
 
-//
-//let newUserList = [];
+
 function signUp(event) {
-    
     let fName = document.querySelector("#firstName").value.trim();
     let lName = document.querySelector("#lastName").value.trim();
     let email = document.querySelector("#email").value.trim();
@@ -101,21 +100,18 @@ function signUp(event) {
     let repPassword = document.querySelector("#retypepassword").value.trim();
     let address = document.querySelector("#address").value.trim();
     address != null ? address : "";
-
     if (fName === "" || lName === "" || email === "" || password === "" 
             || repPassword === "" || password != repPassword) {
-        //isAllValid = false;
         event.preventDefault();
+
+        //document.querySelector(".signUpForm").setAttribute("action", "./signUp.html");
     } else {
         let newUser = new User(fName,lName, email,phone, address,password); 
-        console.log(newUser);
-        users.push(newUser);
-        //newUserList.concat(users)
-        //console.log(users, newUserList);
-       // event.preventDefault();
+        //debugger
+        addUser(newUser);
 
-        document.querySelector(".signUpFrom").setAttribute("action", "./login.html");
+        document.querySelector(".signUpForm").setAttribute("action", "./login.html");
     }
 
 }
-export let exportUserList = newUserList;
+

@@ -9,6 +9,9 @@
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <title>Registration Form</title>
     <style>
+        body{
+            background-color: lightgrey;
+        }
         h2 {
             padding: 20px;
         }
@@ -21,7 +24,7 @@
 
 <body>
     <div class="container">
-        <form class="signUpFrom" action="">
+        <form class="signUpForm" action="#" method="post">
             <div class="row justify-content-center align-items-center h-100">
                 <h2>Registration Form</h2>
             </div>
@@ -58,14 +61,14 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="form-outline">
                         <label class="form-label" for="password">Password<span style="color: red;">*</span></label>
-                        <input type="password" id="password" class="form-control form-control-lg" autocomplete="password" required />
+                        <input type="password" value="" id="password" class="form-control form-control-lg" autocomplete="password" required />
                     </div>
                 </div>
                 <div class="col-md-6 col-sm-12">
                     <div class="form-outline">
                         <label class="form-label" for="retypepassword">Prepeat Password<span
                                 style="color: red;">*</span></label>
-                        <input type="password" id="retypepassword" autocomplete="retypepassword" class="form-control form-control-lg" required />
+                        <input type="password" value="" id="retypepassword" autocomplete="retypepassword" class="form-control form-control-lg" required />
                     </div>
                 </div>
             </div>
