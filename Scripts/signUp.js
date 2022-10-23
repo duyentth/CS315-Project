@@ -5,7 +5,6 @@ import { User, users } from "./user.js";
 
 //Add eventlistener to Email field
 let userEmail = document.querySelector("#email");
-console.log("useremail: ", userEmail);
 userEmail.addEventListener("focusout", validateEmail);
 userEmail.addEventListener("keydown", clearErrorMsg);
 
@@ -90,6 +89,7 @@ function validateRepPassword() {
 }
 
 //
+//let newUserList = [];
 function signUp(event) {
     
     let fName = document.querySelector("#firstName").value.trim();
@@ -110,11 +110,12 @@ function signUp(event) {
         let newUser = new User(fName,lName, email,phone, address,password); 
         console.log(newUser);
         users.push(newUser);
-        console.log(users);
-        //event.preventDefault();
+        //newUserList.concat(users)
+        //console.log(users, newUserList);
+       // event.preventDefault();
 
         document.querySelector(".signUpFrom").setAttribute("action", "./login.html");
     }
 
 }
-export let newUserList = users;
+export let exportUserList = newUserList;

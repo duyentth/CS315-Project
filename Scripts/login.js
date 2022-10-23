@@ -1,9 +1,10 @@
 import { users } from "./user.js";
-//import {newUserList} from "./signUp.js";
-console.log(newUserList);
+//import {exportUserList} from "./signUp"
+//console.log("list from login page: ", exportUserList);
+console.log("list from login page: ", users);
 //page load
 document.querySelector(".login").addEventListener("click", login);
-document.querySelector("#userEmail").focus();
+//document.querySelector("#userEmail").focus();
 let userEmail = document.querySelector("#userEmail");
 userEmail.addEventListener("focusout",validateEmail );
 userEmail.addEventListener("keydown",clearErrorMsg);
