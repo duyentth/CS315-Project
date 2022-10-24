@@ -3,7 +3,7 @@ import { User, getUsers } from "./user.js";
 
 //page load
 document.querySelector(".login").addEventListener("click", login);
-//document.querySelector("#userEmail").focus();
+document.querySelector("#userEmail").focus();
 let userEmail = document.querySelector("#userEmail");
 userEmail.addEventListener("focusout",validateEmail );
 userEmail.addEventListener("keydown",clearErrorMsg);
