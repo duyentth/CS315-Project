@@ -36,6 +36,36 @@ export let initData = () => {
     );
     products.push(product);
   }
+
+  // init best deals products
+  for (let i = 1; i <= 20; i++) {
+    let now = Date.now() + i * 100;
+    let product = new Product(
+      "Name " + i,
+      BEST_DEALS,
+      Math.floor(Math.random() * 500 + 1),
+      Math.floor(Math.random() * 2000 + 10) + "$",
+      "Description " + i,
+      "./images/best-deals/image-" + i + ".jpeg",
+      "CS315-" + now.toString(32)
+    );
+    products.push(product);
+  }
+
+  // init new arrivals products
+  for (let i = 1; i <= 5; i++) {
+    let now = Date.now() + i * 100;
+    let product = new Product(
+      "Name " + i,
+      NEW_ARRIVAL,
+      Math.floor(Math.random() * 500 + 1),
+      Math.floor(Math.random() * 2000 + 10) + "$",
+      "Description " + i,
+      "./images/new-arrivals/image-" + i + ".jpeg",
+      "CS315-" + now.toString(32)
+    );
+    products.push(product);
+  }
   let products_json = JSON.stringify(products);
   localStorage.setItem("productList", products_json);
 };
@@ -59,6 +89,7 @@ export let getProductList = () => {
         product.quantity,
         product.price,
         product.description,
+        product.imgAddress,
         product.id
       )
     );
