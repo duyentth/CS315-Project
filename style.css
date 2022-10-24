@@ -1,0 +1,14 @@
+.carosoul-image-container {
+  width: 50em;
+  height: 500px;
+}
+.carosoul-image {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.product-card {
+  border: 1px solid;
+  height: fit-content;
+}
