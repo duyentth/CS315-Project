@@ -38,7 +38,7 @@ export let initData = () => {
   }
 
   // init best deals products
-  for (let i = 1; i <= 20; i++) {
+  for (let i = 1; i <= 5; i++) {
     let now = Date.now() + i * 100;
     let product = new Product(
       "Name " + i,
