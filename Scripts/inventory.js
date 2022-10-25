@@ -10,13 +10,20 @@ window.onload = () => {
     let addBtn = document.querySelector("#addProd");
     let editBtn = document.querySelector("#editProd");
     let deleteBtn = document.querySelector("#deleteProd");
+<<<<<<< Updated upstream
      let cancelbtn = document.querySelector("#cancelbtn");
     let filterBtn = document.querySelector("#filterProd");
+=======
+    let cancelbtn = document.querySelector("#cancelbtn");
+>>>>>>> Stashed changes
     addBtn.addEventListener("click", addNewProduct);
     editBtn.addEventListener("click", editProduct);
     deleteBtn.addEventListener("click", deleteProducts);
     cancelbtn.addEventListener("click", clearInputData);
+<<<<<<< Updated upstream
     filterBtn.addEventListener("click", filterProducts);
+=======
+>>>>>>> Stashed changes
 
 }
 
@@ -162,7 +169,11 @@ function editProduct() {
 }
 
 function deleteProducts() {
+<<<<<<< Updated upstream
     //debugger
+=======
+    debugger
+>>>>>>> Stashed changes
     let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
     if (document.querySelector("#deleteProd").value === "Delete") {
         showAlert("info", "Please choose products to delete!");
@@ -174,6 +185,7 @@ function deleteProducts() {
         for (let checkbox of allCheckboxes) {
             checkbox.disabled = false;
         }
+<<<<<<< Updated upstream
 
     } else {
         let checkedProductIds = [];
@@ -225,7 +237,35 @@ function filterProducts() {
 
     });
     showProductList(result);
+=======
+>>>>>>> Stashed changes
 
+    } else {
+        let checkedProductIds = [];
+        let rows = document.getElementsByClassName("myRow");
+        for (let i = 0; i < rows.length; i++) {
+            let cols = rows[i].getElementsByTagName("td");
+            console.log("col[0] is ", cols[0]);
+            let checkbox = cols[0].children;
+            if (checkbox[0].checked === true) {
+                checkedProductIds.push(cols[1].innerHTML);
+            }
+        }
+        //  localStorage.setItem("checkedProductIds", JSON.stringify(checkedProductIds));
+        // let checkedProductIds = JSON.parse( localStorage.getItem("checkedProductIds") );
+        // console.log( "checkedProductIds is ",checkedProductIds)
+        if (confirm("Do you want to delete " + checkedProductIds.length +
+            " products?")) {
+            for (let productId of checkedProductIds) {
+                removeProduct(productId);
+            }
+            clearInputData();
+            showProductList(getProductList());
+        } else {
+            clearInputData();
+
+        }
+    }
 }
 
 function clearInputData() {
@@ -235,9 +275,16 @@ function clearInputData() {
     document.querySelector("#imgAddress").value = "";
     document.querySelector("#productDes").value = "";
     document.querySelector("#editProd").value = "Edit";
+    document.querySelector("#editProd").disabled = false;
     document.querySelector("#addProd").disabled = false;
+    document.querySelector("#deleteProd").value = "Delete";
     document.querySelector("#deleteProd").disabled = false;
     document.querySelector("#filterProd").disabled = false;
+    let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
+    for (let checkbox of allCheckboxes) {
+        checkbox.disabled = true;
+        checkbox.checked = false;
+    }
 }
 function fillInData(name, category, quantity, price, image, description) {
     document.querySelector("#productName").value = name;
