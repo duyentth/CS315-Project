@@ -1,7 +1,7 @@
-import { User, initData, addUser } from "./user.js";
+import { User, initData, addUser, getUsers } from "./user.js";
 
 //document.querySelector("#firstName").focus();
-initData();
+//initData();
 console.log("here",localStorage.getItem("userList"));
 //Add eventlistener to Email field
 let userEmail = document.querySelector("#email");
@@ -74,7 +74,6 @@ function validatePassword() {
     if (!isValid) {
         clearErrorMsg();
         showErrorMsg("Please enter a vaild password.");
-        document.querySelector("#password").focus();
     }
 }
 
@@ -85,7 +84,6 @@ function validateRepPassword() {
     if (password != repPassword) {
         clearErrorMsg();
         showErrorMsg("Your password doesn't match.");
-        document.querySelector("#retypepassword").focus();
     }
 }
 
@@ -100,18 +98,27 @@ function signUp(event) {
     let repPassword = document.querySelector("#retypepassword").value.trim();
     let address = document.querySelector("#address").value.trim();
     address != null ? address : "";
-    if (fName === "" || lName === "" || email === "" || password === "" 
-            || repPassword === "" || password != repPassword) {
+    if( isFound( email, getUsers() ) ){
+        clearErrorMsg();
+        showErrorMsg("Your email is already used!");
         event.preventDefault();
-
-        //document.querySelector(".signUpForm").setAttribute("action", "./signUp.html");
+    } else if (fName === "" || lName === "" || email === "" || password === "" 
+            || repPassword === "" || password != repPassword ) {
+        event.preventDefault();        
     } else {
         let newUser = new User(fName,lName, email,phone, address,password); 
-        //debugger
         addUser(newUser);
-
         document.querySelector(".signUpForm").setAttribute("action", "./login.html");
     }
-
+}
+//whether the input email is already used or not
+function isFound(email, userList) {
+    for ( let user of userList) {
+        if ( user.email === email){
+            return true;
+            break;
+        }
+    }
+    return false;
 }
 
