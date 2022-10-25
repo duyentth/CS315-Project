@@ -1,13 +1,25 @@
+const NEW_ARRIVAL = "NA";
+const BEST_DEALS = "BD";
+const NORMAL = "NM";
+
 export class Product {
-    constructor( name, category, quantity, price, description, imgAddress ,id="CS315-" + Date.now().toString(32)) {
-        this.id = id.toUpperCase(),
-        this.name = name,
-        this.category = category,
-        this.quantity = quantity,
-        this.price = price,
-        this.description = description,
-        this.imgAddress = imgAddress
-    }
+  constructor(
+    name,
+    category,
+    quantity,
+    price,
+    description,
+    imgAddress,
+    id = "CS315-" + Date.now().toString(32)
+  ) {
+    (this.id = id.toUpperCase()),
+      (this.name = name),
+      (this.category = category),
+      (this.quantity = quantity),
+      (this.price = price),
+      (this.description = description),
+      (this.imgAddress = imgAddress);
+  }
 }
 export let initData = () => {
     //let oldProducts = getProductList();
@@ -24,8 +36,20 @@ export let initData = () => {
 }
 
 export let addProduct = (product) => {
+  let productList = getProductList();
+  productList.push(product);
+  let productList_json = JSON.stringify(productList);
+  localStorage.setItem("productList", productList_json);
+};
+
+export let removeProduct = (productId) => {
     let productList = getProductList();
-    productList.push(product);
+    for ( let i = 0; i < productList.length; i ++) {
+        if ( productList[i].id === productId) {
+            productList.splice(i,1);
+            break;
+        }
+    }
     let productList_json = JSON.stringify(productList);
     localStorage.setItem("productList", productList_json);
 }
@@ -45,8 +69,11 @@ export let getProductList = () => {
     let products_raw = JSON.parse(localStorage.getItem("productList"));
     let productList = [];
     for (let product of products_raw) {//name, category, quantity, price, description, id
-        productList.push(new Product( product.name, product.category, product.quantity, product.price, product.description, product.imgAddress ,product.id));
+        productList.push(new Product( product.name, product.category, product.quantity, product.price, product.description, product.id));
     }
     return productList;
 }
 
+export function getNewArrivalsItems() {
+  return getProductList().filter((item) => item.category === NEW_ARRIVAL);
+}
