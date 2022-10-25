@@ -7,17 +7,16 @@ window.onload = () => {
     showProductList(productList);
     //document.querySelector("#productName").focus();
 
-    //call clickhandler for data table function
-
-    //add event listener to functionn buttons
     let addBtn = document.querySelector("#addProd");
     let editBtn = document.querySelector("#editProd");
     let deleteBtn = document.querySelector("#deleteProd");
-    let clearBtn = document.querySelector("#clearbtn");
+     let cancelbtn = document.querySelector("#cancelbtn");
+    let filterBtn = document.querySelector("#filterProd");
     addBtn.addEventListener("click", addNewProduct);
     editBtn.addEventListener("click", editProduct);
     deleteBtn.addEventListener("click", deleteProducts);
-    clearBtn.addEventListener("click", clearInputData);
+    cancelbtn.addEventListener("click", clearInputData);
+    filterBtn.addEventListener("click", filterProducts);
 
 }
 
@@ -162,8 +161,70 @@ function editProduct() {
 
 }
 
-function deleteProducts() { 
-    showAlert("info", "Please choose products to delete!");
+function deleteProducts() {
+    //debugger
+    let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
+    if (document.querySelector("#deleteProd").value === "Delete") {
+        showAlert("info", "Please choose products to delete!");
+        document.querySelector("#deleteProd").value = "Submit";
+        document.querySelector("#editProd").disabled = true;
+        document.querySelector("#addProd").disabled = true;
+        document.querySelector("#filterProd").disabled = true;
+
+        for (let checkbox of allCheckboxes) {
+            checkbox.disabled = false;
+        }
+
+    } else {
+        let checkedProductIds = [];
+        let rows = document.getElementsByClassName("myRow");
+        for (let i = 0; i < rows.length; i++) {
+            let cols = rows[i].getElementsByTagName("td");
+            console.log("col[0] is ", cols[0]);
+            let checkbox = cols[0].children;
+            if (checkbox[0].checked === true) {
+                checkedProductIds.push(cols[1].innerHTML);
+            }
+        }
+        if (confirm("Do you want to delete " + checkedProductIds.length +
+            " products?")) {
+            for (let productId of checkedProductIds) {
+                removeProduct(productId);
+            }
+            clearInputData();
+            showProductList(getProductList());
+        } else {
+            clearInputData();
+
+        }
+    }
+}
+
+
+function filterProducts() {
+    let name = document.querySelector("#productName").value.trim();
+    let quantity = document.querySelector("#quantity").value.trim();
+    let price = document.querySelector("#price").value.trim();
+    price = price.includes('$')? price: price + "$";
+    let description = document.querySelector("#productDes").value.trim();
+    let options = document.querySelectorAll("option");
+    let selectedCategory;
+    for ( let opt of options) {
+        if(opt.selected) {
+            selectedCategory = opt.innerHTML;
+            break;
+        }
+    }
+    let productList = getProductList();
+    let result = productList.filter(product => {
+        (product.name.includes(name) ||
+        product.description.includes(description) ||
+        product.category === selectedCategory||
+        product.price === price ||
+        product.quantity === quantity) ? true: false;
+
+    });
+    showProductList(result);
 
 }
 
