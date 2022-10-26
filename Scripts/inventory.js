@@ -109,7 +109,6 @@ function editProduct() {
             let createClickHandler =
                 function (row) {
                     return function () {
-                        //debugger
                         let cell = row.getElementsByTagName("td")[1];
                         let id = cell.innerHTML;
                         //store id value into localStorage
@@ -129,7 +128,7 @@ function editProduct() {
 
 
     } else {//eventlistener on Save button
-        if (confirm("Your product will be updated immediately!")) {//debugger
+        if (confirm("Your product will be updated immediately!")) {//
             removeProduct(localStorage.getItem("selectedProductId"));
             //collect new info for product
             let name = document.querySelector("#productName").value.trim();
@@ -166,7 +165,7 @@ function editProduct() {
 }
 
 function deleteProducts() {
-    //debugger
+    //
     let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
     if (document.querySelector("#deleteProd").value === "Delete") {
         showAlert("info", "Please choose products to delete!");
@@ -225,7 +224,7 @@ function filterProducts() {
     }
     let productList = getProductList();
     let result = [];
-    debugger
+    
     for (let product of productList) {
         console.log(product.price);
         let nameCondition = (name === "") ? true : product.name.includes(name);
