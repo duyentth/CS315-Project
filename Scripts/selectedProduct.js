@@ -9,11 +9,12 @@ function setAddToCartOnClick(productId) {
         if(response === "nouserfound"){
             alert("You have not logged in yet. Please login and come back.")
             return;
-        }else
-            alert("Product Added to Cart");
-            let totalCartItems = totalItemsInCart();
-            document.getElementById("total-cart-items").innerHTML = totalCartItems;
         }
+        //alert("Product Added to Cart");
+        let totalCartItems = totalItemsInCart();
+        document.getElementById("total-cart-items").innerHTML = totalCartItems;
+        location.href="./main.html";
+    }
 }
 
 function getSelectedProductId(){
