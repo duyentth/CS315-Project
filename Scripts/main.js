@@ -5,10 +5,19 @@ import {
   getNewArrivalsItems,
 } from "./products.js";
 
+import {getCurrentUser} from './user.js'
+
 window.onload = function () {
   initData();
   appendBestDeals();
   appendNewArrival();
+
+  setTimeout(function(){
+     if (getCurrentUser() != null){
+        document.getElementById('login').innerHTML = 'Hello ' + getCurrentUser().fname;
+        document.getElementById('login').href = '#';
+     }
+  }, 2000);
 };
 
 function appendBestDeals() {
@@ -19,7 +28,7 @@ function appendBestDeals() {
     bestDealsDiv.insertAdjacentHTML(
       "beforeend",
       `<div class="carousel-item ${active}">
-        <a href="productDetails.html?id=${bestDealItem.id}">
+        <a href="selectedProduct.html?id=${bestDealItem.id}">
           <div class="card" style="height: 16rem; text-align:center;">
             <img class="card-img-top" src="${bestDealItem.imgAddress}" alt="Card image cap" style="height: 100%; object-fit:cover;">
             <div class="card-body">
@@ -43,7 +52,7 @@ function appendNewArrival() {
     newArrivalsItemsDiv.insertAdjacentHTML(
       "beforeend",
       `<div class="carousel-item ${active}">
-        <a href="productDetails.html?id=${newArrival.id}">
+        <a href="selectedProduct.html?id=${newArrival.id}">
           <div class="card" style="height: 16rem; text-align:center;">
             <img class="card-img-top" src="${newArrival.imgAddress}" alt="Card image cap" style="height: 100%; object-fit:cover;">
             <div class="card-body">
