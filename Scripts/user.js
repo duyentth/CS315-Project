@@ -55,8 +55,8 @@ export let addCurrentUser = (email) => {
 export let getCurrentUser = function(){
     let email = localStorage.getItem("currentUserEmail");
     if (email == null) return null;
-    var users = getUsers();
-    for(var i=0; i<users.length;i++)
+    let users = getUsers();
+    for(let i=0; i<users.length;i++)
         if (users[i].email == email)
             return users[i];
     return null;
