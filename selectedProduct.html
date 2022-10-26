@@ -20,7 +20,7 @@
 
     .prodContent {
       display: grid;
-      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-columns: 1fr 1.5fr 1fr;
       justify-content: center;
     }
 
@@ -83,17 +83,26 @@
     </div>
     <div class="prodContent">
       <div class="content">
-        <h4>catergory here</h4>
-        <img src="./images/image-1.webp" alt="" style="object-fit:cover; width: 100%; height: 300px">
+        <i class="note">catergory here</i>
+        <img class="prodImg" src="" alt="" style="object-fit:cover; width: 100%; height: 300px">
       </div>
       <div class="content">
-        <div class="prodName">Productname</div>
-        <div class="rating">Rating</div>
+        <div class="prodName" style="font-size:1.6em">Productname</div>
         <div class="description">Product Description</div>
+        <div class="price" style="color:brown ; font-weight: 500; font-size: 1.6em;" >Price: </div>
       </div>
       <div class="content">
-        <p class="price">This is price</p>
-        <button class="addToCart">Add to Card</button>
+        <p class="price" style="color:brown ; font-weight: 500; font-size: 1.6em;">This is price</p>
+        <select name="" id="quantity" >
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select> 
+        <label for="quantity">Quantity</label>
+        <button class="addToCart btn btn-warning" >Add to Cart</button>
+        <a href="#">Return policy</a>
       </div>
 
 
@@ -227,7 +236,7 @@
 <!-- Footer -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
-    <script src="./Scripts/selectedProduct.js"></script>
+    <script type="module" src="./Scripts/selectedProduct.js"></script>
 </body>
 
 </html>

@@ -16,10 +16,14 @@ export let initData = () => {
 
 
   let products = [];
+  let desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+  + "tempor incididunt ut labore et dolore magna aliqua. Quis lectus nulla at volutpat diam."
+  + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+  + "tempor incididunt ut labore et dolore magna aliqua. Quis lectus nulla at volutpat diam.";
   for (let i = 1; i <= 20; i++) {   
       let  now =  Date.now() + i * 10000; 
        let product = new Product("Name " + i, "Category " + i, Math.floor(Math.random() * 500 + 1),
-          Math.floor(Math.random() * 2000 + 10), "Description "  + i,"./images/image-" + i + ".webp","CS315-" + now.toString(32) );
+          Math.floor(Math.random() * 2000 + 10), desc,"./images/image-" + i + ".webp","CS315-" + now.toString(32) );
      products.push(product);
   }
   let products_json = JSON.stringify(products);
