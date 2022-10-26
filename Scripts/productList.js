@@ -2,6 +2,8 @@ import {
   getProductListByFilter,
   getProductsByPrice,
   addProductToCart,
+  getNewArrivalsItems,
+  getBestDealsItems
 } from "./products.js";
 
 window.onload = function () {
@@ -9,10 +11,21 @@ window.onload = function () {
   let url = new URL(url_string);
   let searchBoxValue = url.searchParams.get("searchBox");
   let category = url.searchParams.get("category");
+  let tag = url.searchParams.get("tag");
   let products = getProductListByFilter({searchBoxValue, category});
+  products = filterByTag(products, tag);
   appendProducts(products);
-  setFilterOnClick({searchBoxValue, category});
+  setFilterOnClick({searchBoxValue, category, tag});
 };
+
+function filterByTag(products, tag){
+  if(tag === 'newArrival'){
+    return getNewArrivalsItems()
+  }else if(tag === 'bestDeals'){
+    return getBestDealsItems();
+  }else 
+    return products;
+}
 
 function appendProducts(products) {
   let productListDiv = document.getElementById("product-list-cards");
@@ -25,11 +38,12 @@ function appendProducts(products) {
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" style="height: 12rem" src="${product.imgAddress}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
+                   <a href="productDetails.html?id=${product.id}"> <h5 class="card-title">${product.name}</h5> </a>
                     <h6 class="card-text">$ ${product.price}</h6>
                     <p class="card-text">${product.description}</p>
-                    <button class="btn btn-primary" id="${addToCartBtnId}">Add to Cart</button>
+                  
                 </div>
+                 <button class="btn btn-primary" id="${addToCartBtnId}">Add to Cart</button>
             </div>
         </div>`
     );
@@ -37,12 +51,15 @@ function appendProducts(products) {
   }
 }
 
-function setFilterOnClick({searchBoxValue, category}) {
+function setFilterOnClick({searchBoxValue, category, tag}) {
   let applyButton = document.getElementById("apply-filter");
   applyButton.onclick = function () {
     let minPrice = document.getElementById("price-min").value;
     let maxPrice = document.getElementById("price-max").value;
     let products = getProductListByFilter({searchBoxValue, category});
+    if(tag){
+      products = filterByTag(products, tag);
+    }
     let filteredProducts = getProductsByPrice(products, minPrice, maxPrice);
     appendProducts(filteredProducts);
   };
