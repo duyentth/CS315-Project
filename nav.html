@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" style="gap: 25px">
           <li class="nav-item">
             <a
               id="home-link"
@@ -31,10 +31,7 @@
               Home
             </a>
           </li>
-          <li class="nav-item"> 
-            <a id="login" class="nav-link" href="/login.html">Sign In</a>
-            
-          </li>
+         
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -56,7 +53,7 @@
         </ul>
 
         <form class="d-flex" role="search" action="/productList.html">
-          <input
+          <input style="width: 40rem;"
             class="form-control me-2"
             type="search"
             placeholder="Search"
@@ -65,19 +62,19 @@
           />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
-        <a
-          id="home-link"
-          class="nav-link active"
-          style="margin-left: 20px"
-          aria-current="page"
-          href="/cart.html"
-        >
-          <img
-            src="./images/shopping-cart.webp"
-            style="height: 20px; width: 20px"
-          />
-          Cart
-        </a>
+        <ul class="navbar-nav "  style="gap: 17px;">
+          <li>
+            <a id="home-link" class="nav-link active" style="margin-left: 20px" aria-current="page" href="/cart.html">
+              <img src="./images/shopping-cart.webp" style="height: 20px; width: 20px" />
+              Cart
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav " style="gap: 17px;">
+          <li>
+            <a class="nav-link" href="/login.html">Sign In</a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

@@ -3,7 +3,8 @@ import {
   getProductsByPrice,
   addProductToCart,
   getNewArrivalsItems,
-  getBestDealsItems
+  getBestDealsItems,
+  filterRating
 } from "./products.js";
 
 window.onload = function () {
@@ -15,6 +16,7 @@ window.onload = function () {
   let products = getProductListByFilter({searchBoxValue, category});
   products = filterByTag(products, tag);
   appendProducts(products);
+  createPagination(products.length);
   setFilterOnClick({searchBoxValue, category, tag});
 };
 
@@ -23,7 +25,9 @@ function filterByTag(products, tag){
     return getNewArrivalsItems()
   }else if(tag === 'bestDeals'){
     return getBestDealsItems();
-  }else 
+  }else if(tag === 'bestSeller'){
+    return filterRating();
+  }else
     return products;
 }
 
@@ -38,7 +42,7 @@ function appendProducts(products) {
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" style="height: 12rem" src="${product.imgAddress}" alt="Card image cap">
                 <div class="card-body">
-                   <a href="productDetails.html?id=${product.id}"> <h5 class="card-title">${product.name}</h5> </a>
+                   <a href="selectedProduct.html?id=${product.id}"> <h5 class="card-title">${product.name}</h5> </a>
                     <h6 class="card-text">$ ${product.price}</h6>
                     <p class="card-text">${product.description}</p>
                   
@@ -71,4 +75,23 @@ function setAddToCartOnClick(addToCartBtnId, productId) {
     addProductToCart(productId);
     alert("Product Added to Cart");
   };
+}
+
+function createPagination(products){
+  let pagination = document.getElementById("pagination");
+   pagination.insertAdjacentHTML(
+      "beforeend",
+      `<div style="float:right; margin: 15px 60px 0 0">
+      <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+      </nav>
+      </div> </br></br></br>`
+      
+    );
 }

@@ -1,5 +1,5 @@
 export class Product {
-  constructor( name, category, quantity, price, description, imgAddress ,id="CS315-" + Date.now().toString(32)) {
+  constructor( name, category, quantity, price, description, imgAddress ,id="CS315-" + Date.now().toString(32), dateCreated = Date.now(), rating = getRatingInteger(1,5)) {
       this.id = id.toUpperCase(),
       this.name = name,
       this.category = category,
@@ -7,7 +7,8 @@ export class Product {
       this.price = price,
       this.description = description,
       this.imgAddress = imgAddress
-      this.dateCreated = Date.now();
+      this.dateCreated = dateCreated;
+      this.rating = rating;
   }
 }
 export let initData = () => {
@@ -24,6 +25,10 @@ export let initData = () => {
   }
   let products_json = JSON.stringify(products);
   localStorage.setItem("productList", products_json);
+}
+
+function getRatingInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 export let addProduct = (product) => {
@@ -48,7 +53,7 @@ export let getProductList = () => {
   let products_raw = JSON.parse(localStorage.getItem("productList"));
   let productList = [];
   for (let product of products_raw) {//name, category, quantity, price, description, id
-      productList.push(new Product( product.name, product.category, product.quantity, product.price, product.description, product.imgAddress ,product.id, product.dateCreated));
+      productList.push(new Product( product.name, product.category, product.quantity, product.price, product.description, product.imgAddress ,product.id, product.dateCreated, product.rating));
   }
   return productList;
 }
@@ -93,7 +98,8 @@ export let getCartProducts = () => {
         product.description,
         product.imgAddress,
         product.id,
-        product.dateCreated
+        product.dateCreated,
+        product.rating,
       )
     );
   }
@@ -157,3 +163,8 @@ export function removeProductFromCart(productId) {
   localStorage.setItem("cart", cartProducts_json);
 }
 
+export function filterRating(){
+  let products = getProductList();
+  console.log(products);
+  return products.filter((item) => item.rating >= 4);
+}

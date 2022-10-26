@@ -1,14 +1,32 @@
 import { getCartProducts, removeProductFromCart } from "./products.js";
 
 window.onload = function () {
-  console.log(getCartProducts());
-  appendProducts(getCartProducts());
+  let cartProducts = getCartProducts()
+  let getCountAndPrice = appendProducts(cartProducts);
+  getCartDetails(getCountAndPrice)
+
+
 };
+function getCartDetails(cartDetails){
+  let cartDetailsDiv = document.getElementById("cart-details");
+  cartDetailsDiv.innerHTML = "";
+  
+   cartDetailsDiv.insertAdjacentHTML(
+      "beforeend",
+      ` <div>Total Items: ${cartDetails.countProduct}</div>
+        <div>Total Price: $${cartDetails.totalPrice}</div>`
+    );
+
+}
 
 function appendProducts(products) {
   let productListDiv = document.getElementById("product-list-cards");
   productListDiv.innerHTML = "";
+  
+  let totalPrice = 0;
+  
   for (let product of products) {
+    totalPrice = totalPrice + product.price;
     let removeFromCartBtnId = "removeFromCart-" + product.id;
     productListDiv.insertAdjacentHTML(
       "beforeend",
@@ -26,12 +44,17 @@ function appendProducts(products) {
     );
     setRemoveFromCartOnClick(removeFromCartBtnId, product.id);
   }
+
+  return {totalPrice, countProduct: products.length};
 }
 
 function setRemoveFromCartOnClick(removeFromCartBtnId, productId) {
   let addToCartBtn = document.getElementById(removeFromCartBtnId);
   addToCartBtn.onclick = function () {
     removeProductFromCart(productId);
-    appendProducts(getCartProducts());
+   let getPriceAndCount = appendProducts(getCartProducts());
+    getCartDetails(getPriceAndCount);
+   
+
   };
 }
