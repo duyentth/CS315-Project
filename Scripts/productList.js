@@ -7,10 +7,11 @@ import {
 window.onload = function () {
   let url_string = window.location.href;
   let url = new URL(url_string);
-  let paramValue = url.searchParams.get("searchBox");
-  console.log(paramValue);
-  appendProducts(getProductListByFilter(paramValue));
-  setFilterOnClick(paramValue);
+  let searchBoxValue = url.searchParams.get("searchBox");
+  let category = url.searchParams.get("category");
+  let products = getProductListByFilter({searchBoxValue, category});
+  appendProducts(products);
+  setFilterOnClick({searchBoxValue, category});
 };
 
 function appendProducts(products) {
@@ -36,12 +37,12 @@ function appendProducts(products) {
   }
 }
 
-function setFilterOnClick(paramValue) {
+function setFilterOnClick({searchBoxValue, category}) {
   let applyButton = document.getElementById("apply-filter");
   applyButton.onclick = function () {
     let minPrice = document.getElementById("price-min").value;
     let maxPrice = document.getElementById("price-max").value;
-    let products = getProductListByFilter(paramValue);
+    let products = getProductListByFilter({searchBoxValue, category});
     let filteredProducts = getProductsByPrice(products, minPrice, maxPrice);
     appendProducts(filteredProducts);
   };
