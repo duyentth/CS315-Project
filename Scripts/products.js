@@ -87,29 +87,6 @@ export let getProductListByFilter = ({ searchBoxValue, category }) => {
   return productList;
 };
 
-export let getCartProducts = () => {
-  let products_raw = JSON.parse(localStorage.getItem("cart"));
-  if (!products_raw) return [];
-  let productList = [];
-  for (let product of products_raw) {
-    //name, category, quantity, price, description, id
-    productList.push(
-      new Product(
-        product.name,
-        product.category,
-        product.quantity,
-        product.price,
-        product.description,
-        product.imgAddress,
-        product.id,
-        product.dateCreated,
-        product.rating,
-      )
-    );
-  }
-  return productList;
-};
-
 export function getBestDealsItems() {
   return getProductList().filter((item) => item.price <= 500);
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- CSS only -->
-    <script src="./Scripts/nav.js"></script>
+    <script type="module" src="./Scripts/nav.js"></script>
     <script src="./Scripts/footer.js"></script>
     <script type="module" src="./Scripts/main.js"></script>
     <link rel="stylesheet" href="style.css" />
@@ -142,35 +142,18 @@
               </button>
             </div>
           </div>
-
           <div class="col">
             <div class="text-center">
               <a href="productList.html?tag=bestSeller">Best Seller</a>
             </div>
-            <div id="best-seller" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner" id="Best-Seller-Holder"></div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#best-seller"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
+            <div id="best-seller" class="carousel slide category-cards" data-bs-ride="carousel">
+              <div class="carousel-inner carosoul-image-container" id="Best-Seller-Holder"></div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#best-seller" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#best-seller"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
+              <button class="carousel-control-next" type="button" data-bs-target="#best-seller" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>

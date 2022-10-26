@@ -13,14 +13,7 @@ window.onload = function () {
   initData();
   appendBestDeals();
   appendNewArrival();
-  appendBestSeller()
-
-  setTimeout(function(){
-     if (getCurrentUser() != null){
-        document.getElementById('login').innerHTML = 'Hello ' + getCurrentUser().fname;
-        document.getElementById('login').href = '#';
-     }
-  }, 2000);
+  appendBestSeller();
 };
 
 function appendBestDeals() {

@@ -1,11 +1,12 @@
 import {
   getProductListByFilter,
   getProductsByPrice,
-  addProductToCart,
   getNewArrivalsItems,
   getBestDealsItems,
   filterRating
 } from "./products.js";
+
+import { addToCart } from "./cart.js"
 
 window.onload = function () {
   let url_string = window.location.href;
@@ -72,7 +73,7 @@ function setFilterOnClick({searchBoxValue, category, tag}) {
 function setAddToCartOnClick(addToCartBtnId, productId) {
   let addToCartBtn = document.getElementById(addToCartBtnId);
   addToCartBtn.onclick = function () {
-    addProductToCart(productId);
+    addToCart(productId);
     alert("Product Added to Cart");
   };
 }

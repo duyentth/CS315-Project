@@ -1,3 +1,5 @@
+import { getCurrentUser } from "./user.js" 
+
 window.addEventListener("load", function () {
   fetch("./nav.html")
     .then((response) => response.text())
@@ -13,4 +15,10 @@ window.addEventListener("load", function () {
   );
   script.setAttribute("crossorigin", "anonymous");
   document.body.append(script);
+  setTimeout(function(){
+     if (getCurrentUser() != null){
+        document.getElementById('login').innerHTML = 'Hello ' + getCurrentUser().fname;
+        document.getElementById('login').href = '#';
+     }
+  }, 1000);
 });

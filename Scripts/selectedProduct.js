@@ -1,5 +1,14 @@
 import { Product, initData, getProductList, addProduct, removeProduct } from "./products.js";
-import {updateQuantity, removeProductOutOfCart, addProductToCart, getAllUserCarts, getCurrentCart, Cart} from "./cartObj.js";
+import { addToCart } from "./cart.js";
+
+function setAddToCartOnClick(productId) {
+    let addToCartBtn = document.getElementById("add-to-cart");
+    addToCartBtn.onclick = function(){
+        let quantity = Number(document.getElementById("quantity").value);
+        addToCart(productId, quantity);
+        alert("Product Added to Cart");
+    }
+}
 
 function getSelectedProductId(){
     let params = (new URL(document.location)).searchParams;
@@ -22,7 +31,7 @@ window.onload = () => {
 
     let productId = getSelectedProductId();
     let product = getProductDetail(productId);
-    console.log("Product is ", product);
+    setAddToCartOnClick(productId);
    
     //loading data for content 1
     document.querySelector(".note").innerHTML = product.category;

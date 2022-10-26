@@ -1,60 +1,91 @@
-import { getCartProducts, removeProductFromCart } from "./products.js";
+import {getProductById} from "./products.js";
+import {getCurrentUser} from "./user.js";
 
-window.onload = function () {
-  let cartProducts = getCartProducts()
-  let getCountAndPrice = appendProducts(cartProducts);
-  getCartDetails(getCountAndPrice)
-
-
-};
-function getCartDetails(cartDetails){
-  let cartDetailsDiv = document.getElementById("cart-details");
-  cartDetailsDiv.innerHTML = "";
-  
-   cartDetailsDiv.insertAdjacentHTML(
-      "beforeend",
-      ` <div>Total Items: ${cartDetails.countProduct}</div>
-        <div>Total Price: $${cartDetails.totalPrice}</div>`
-    );
-
+class CartProduct {
+    constructor(products, quantity){
+        this.products = products;
+        this.quantity = quantity;
+    }
 }
 
-function appendProducts(products) {
-  let productListDiv = document.getElementById("product-list-cards");
-  productListDiv.innerHTML = "";
-  
-  let totalPrice = 0;
-  
-  for (let product of products) {
-    totalPrice = totalPrice + product.price;
-    let removeFromCartBtnId = "removeFromCart-" + product.id;
-    productListDiv.insertAdjacentHTML(
-      "beforeend",
-      `<div class="col-4 mb-3">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" style="height: 12rem" src="${product.imgAddress}" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">${product.name}</h5>
-                    <h6 class="card-text">$ ${product.price}</h6>
-                    <p class="card-text">${product.description}</p>
-                    <button class="btn btn-danger" id="${removeFromCartBtnId}">Remove From Cart</button>
-                </div>
-            </div>
-        </div>`
-    );
-    setRemoveFromCartOnClick(removeFromCartBtnId, product.id);
+export class Cart {
+  constructor(user, cartProducts) {
+      this.id = "CART-" + Date.now().toString(32).toUpperCase();
+      this.user = user;
+      this.cartProducts = cartProducts;
   }
-
-  return {totalPrice, countProduct: products.length};
 }
 
-function setRemoveFromCartOnClick(removeFromCartBtnId, productId) {
-  let addToCartBtn = document.getElementById(removeFromCartBtnId);
-  addToCartBtn.onclick = function () {
-    removeProductFromCart(productId);
-   let getPriceAndCount = appendProducts(getCartProducts());
-    getCartDetails(getPriceAndCount);
-   
 
-  };
+
+export let getCartProducts = () => {
+  return JSON.parse(localStorage.getItem("cart"));
+};
+
+// {
+//     [userId]: {
+//         cartId:1,
+//         user: user,
+//         cartProducts: {
+//             [productId]: {product: product, quantity: quantity},
+//             [productId]: {product, quantity}
+//         }
+//     }
+// }
+
+// {"sharada.khatiwada@miu.edu":{"CS315-1GG9CAN35":{"products":{"products":{"id":"CS315-1GG9CAN35","name":"Name 1","category":"Category 1","quantity":242,"price":260,"description":"Description 1","imgAddress":"./images/image-1.webp","dateCreated":1666762224981,"rating":2},"quantity":1}}}}
+
+export let addToCart = (productId, quantity = 1) => {
+    // localStorage.removeItem("cart");
+    let currentUser = getCurrentUser();
+    if(currentUser === null)
+        return "nouserfound";
+    let productsInCart = getCartProducts();
+    if(!productsInCart)
+        productsInCart = {};
+    let cartItemsForCurrentUser = productsInCart[currentUser.email];
+    let product = getProductById(productId);
+
+    // no items in cart for this user
+    if(!cartItemsForCurrentUser){
+        cartItemsForCurrentUser = {};
+        let cartProduct = new CartProduct(product, quantity);
+        cartItemsForCurrentUser = new Cart(currentUser, { [productId] : cartProduct} );
+    }
+
+    // no items in cart for the particular product
+    else if(!cartItemsForCurrentUser["cartProducts"][productId]){
+        cartItemsForCurrentUser["cartProducts"][productId] = new CartProduct(product, quantity);
+    }
+
+    // update the quantity
+    else{
+        let cartProduct = cartItemsForCurrentUser["cartProducts"][productId];
+        cartProduct["quantity"] = cartProduct["quantity"] + quantity;
+    }
+    productsInCart[currentUser.email] = cartItemsForCurrentUser;
+    localStorage.setItem("cart", JSON.stringify(productsInCart) );
 }
+
+export let removeFromCart = (productId) => {
+    let currentUser = getCurrentUser();
+    let productsInCart =  getCartProducts();
+    let cartItemsForCurrentUser = productsInCart[currentUser.email]; 
+    let cartItems = cartItemsForCurrentUser.cartProducts;
+
+    if(!cartItems){
+        return;
+    }
+
+    // if there is only 1 product, delete from cart
+    if(cartItems[productId]["quantity"] === 1){
+        delete cartItems[productId];
+        cartItemsForCurrentUser.cartProducts = cartItems;
+    }else{
+        cartItems[productId]["quantity"] = cartItems[productId]["quantity"] - 1;
+    }
+    productsInCart[currentUser.email] = cartItemsForCurrentUser;
+    console.log(productsInCart);
+    localStorage.setItem("cart", JSON.stringify(productsInCart) );
+}
+
