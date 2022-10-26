@@ -55,7 +55,9 @@ function login(event) {
         document.querySelector("#userEmail").focus();
         return;
     }
+    document.cookie = "userEmail=" + email;
     if (isManger === true) {
+        
         document.querySelector(".loginForm").setAttribute("action", "./inventory.html");
     } else {
         document.querySelector(".loginForm").setAttribute("action", "./main.html");

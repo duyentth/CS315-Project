@@ -35,7 +35,7 @@
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 col-sm-12 mb-4">
                         <div class="form-outline">
-                            <input type="text" id="productName" class="form-control form-control-lg" />
+                            <input type="text" id="productName" class="form-control form-control-lg"/>
                             <label class="form-label" for="productName">Product Name</label>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-6 mb-4 col-sm-12 mb-4">
+                    <div class="col-md-4 mb-4 col-sm-12 mb-4">
 
                         <div class="form-outline">
                             <input type="text" id="quantity" class="form-control form-control-lg" />
@@ -79,7 +79,7 @@
                         </div>
 
                     </div>
-                    <div class="col-md-6 mb-4">
+                    <div class="col-md-4 mb-4">
 
                         <div class="form-outline">
                             <input type="text" id="price" class="form-control form-control-lg" />
@@ -87,13 +87,21 @@
                         </div>
 
                     </div>
+                    <div class="col-md-4 mb-4">
+
+                        <div class="form-outline">
+                            <input type="text" id="imgAddress" class="form-control form-control-lg" />
+                            <label class="form-label" for="imgAddress">Image Address</label>
+                        </div>
+
+                    </div>
                 </div>
 
                 <div class="row">
+                    
                     <div class="col-12 mb-4">
-
                         <div class="form-outline">
-                            <textarea name="productDes" id="productDes" cols="15" rows="3"
+                            <textarea name="productDes" id="productDes" cols="15" rows="5"
                                 class="form-control form-control-sm"></textarea>
                             <label class="form-label" for="productDes">Description</label>
                         </div>
@@ -101,12 +109,14 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12  mb-2">
-                        <input id="addProd" class="btn btn-primary btn-sm" type="submit" value="Add" />
-                        <input id="editProd" disabled class="btn btn-primary  btn-sm" type="submit" value="Edit" />
-                        <input id="deleteProd" disabled class="btn btn-primary  btn-sm" type="submit" value="Delete" />
-                        <input id="dflter"  class="btn btn-primary  btn-sm" type="submit" value="Filter" />
+                    <div class="col-lg-6 col-md-6 mb-2">
+                        <input id="addProd" class="btn btn-primary btn-sm" type="button"  value="Add" />
+                        <input id="editProd"  class="btn btn-primary  btn-sm" type="button"  value="Edit" />
+                        <input id="deleteProd"  class="btn btn-primary  btn-sm" type="button"  value="Delete" />
+                        <input id="filterProd" disabled class="btn btn-primary  btn-sm" type="button"  value="Filter" />
+                        <input id="cancelbtn"  class="btn btn-primary  btn-sm" type="button"  value="Cancel" />
                     </div>
+                    <div id = "alertDiv" class="col-lg-4 col-md-6 mb-2 alert "></div>
 
                 </div>
 
@@ -128,18 +138,10 @@
                         <th scope="col">Quanlity</th>
                         <th scope="col">Price</th>
                         <th scope="col">Description</th>
+                        <th scope="col">Image</th>
                     </tr>
                 </thead>
                 <tbody id="prod_content">
-                    <!-- <tr >
-                        <td><input type="checkbox" name="" id=""></td>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>          -->
                 </tbody>
             </table>
         </div>

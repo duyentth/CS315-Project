@@ -43,6 +43,17 @@ export let addProduct = (product) => {
   localStorage.setItem("productList", productList_json);
 };
 
+export let removeProduct = (productId) => {
+  let productList = getProductList();
+  for (let i = 0; i < productList.length; i++) {
+    if (productList[i].id === productId) {
+      productList.splice(i, 1);
+      break;
+    }
+  }
+  let productList_json = JSON.stringify(productList);
+  localStorage.setItem("productList", productList_json);
+};
 export let getProductList = () => {
   let products_raw = JSON.parse(localStorage.getItem("productList"));
   let productList = [];
