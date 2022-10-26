@@ -13,6 +13,10 @@ export class User {
 }
 
 export let initData = function () {
+
+    if (localStorage.getItem("userList") != null) 
+        return;
+
     let manager1 = new User('Duyen', 'Tran', 'duyen.tran@miu.edu', '4433013648',
         "R13 Granville St", "HelloGirls@123", true);
     let manager2 = new User('Sharada', 'Khatiwada', 'sharada.khatiwada@miu.edu', '4453013648',

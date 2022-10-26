@@ -1,7 +1,7 @@
 import { User, initData, addUser, getUsers } from "./user.js";
 
 //document.querySelector("#firstName").focus();
-//initData();
+initData();
 console.log("here",localStorage.getItem("userList"));
 //Add eventlistener to Email field
 let userEmail = document.querySelector("#email");
