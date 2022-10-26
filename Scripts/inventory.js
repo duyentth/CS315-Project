@@ -1,7 +1,7 @@
 import { Product, initData, getProductList, addProduct, removeProduct } from "./products.js";
 window.onload = () => {
     //localStorage.setItem("productList", "");
-    //initData();
+    initData();
     let productList = getProductList();
     showProductList(productList);
     //document.querySelector("#productName").focus();
