@@ -20,9 +20,9 @@ function appendBestDeals() {
       "beforeend",
       `<div class="carousel-item ${active}">
         <div class="card">
-          <img class="card-img-top" src="${bestDealItem.imgAddress}" alt="Card image cap" style="height: 10em">
+          <img class="card-img-top" src="${bestDealItem.imgAddress}" alt="Card image cap" style="height: 15em">
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">${bestDealItem.description}</p>
           </div>
         </div>
       </div>`
@@ -41,9 +41,9 @@ function appendNewArrival() {
       "beforeend",
       `<div class="carousel-item ${active}">
         <div class="card" >
-          <img class="card-img-top" src="${newArrival.imgAddress}" alt="Card image cap" style="height: 10em">
+          <img class="card-img-top" src="${newArrival.imgAddress}" alt="Card image cap" style="height: 15em">
           <div class="card-body">
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <p class="card-text">${newArrival.description}</p>
           </div>
         </div>
       </div>`

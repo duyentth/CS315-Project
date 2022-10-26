@@ -6,8 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="./Scripts/nav.js"></script>
+    <script src="./Scripts/footer.js"></script>
+    <script type="module" src="./Scripts/productList.js"></script>
   </head>
   <body>
     <div id="nav-holder"></div>
+    <div class="container" style="display: grid; height: 100%">
+      <div class="row">
+        <div class="col-3" style="background-color: #80808033">
+          <div class="row">
+            <div class="col-12">
+              <label for="price-range"><b>Price:</b></label>
+              <span id="price-range">
+                <input
+                  type="number"
+                  name="price-min"
+                  id="price-min"
+                  min="0"
+                  max="100000"
+                  placeholder="min"
+                />
+
+                <input
+                  type="number"
+                  name="price-max"
+                  id="price-max"
+                  min="0"
+                  max="100000"
+                  placeholder="max"
+                />
+              </span>
+            </div>
+            <div class="col-12">
+              <button id="apply-filter" class="btn btn-success">Apply</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div
+            class="row bg-light text-dark"
+            style="height: 50rem; overflow-y: scroll"
+            id="product-list-cards"
+          ></div>
+        </div>
+      </div>
+    </div>
+    <div id="footer-holder"></div>
   </body>
 </html>
