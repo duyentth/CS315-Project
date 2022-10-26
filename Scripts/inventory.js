@@ -1,5 +1,4 @@
 import { Product, initData, getProductList, addProduct, removeProduct } from "./products.js";
-console.log("username is ", document.cookie);
 window.onload = () => {
     //localStorage.setItem("productList", "");
     //initData();
@@ -10,20 +9,13 @@ window.onload = () => {
     let addBtn = document.querySelector("#addProd");
     let editBtn = document.querySelector("#editProd");
     let deleteBtn = document.querySelector("#deleteProd");
-<<<<<<< Updated upstream
-     let cancelbtn = document.querySelector("#cancelbtn");
-    let filterBtn = document.querySelector("#filterProd");
-=======
     let cancelbtn = document.querySelector("#cancelbtn");
->>>>>>> Stashed changes
+    let filterBtn = document.querySelector("#filterProd");
     addBtn.addEventListener("click", addNewProduct);
     editBtn.addEventListener("click", editProduct);
     deleteBtn.addEventListener("click", deleteProducts);
     cancelbtn.addEventListener("click", clearInputData);
-<<<<<<< Updated upstream
     filterBtn.addEventListener("click", filterProducts);
-=======
->>>>>>> Stashed changes
 
 }
 
@@ -69,13 +61,18 @@ function addNewProduct() {
     let imageAddress = document.querySelector("#imgAddress").value.trim();
     let description = document.querySelector("#productDes").value.trim();
     //create new Product
-    let newProduct = new Product(name, selectedCatrgory, quantity, price, description,
-        imageAddress,);
-    //add new Product to ProductLst localStorage
-    addProduct(newProduct);
-    showProductList(getProductList());
-    clearInputData();
-    showAlert("success", "Added Successfully!");
+    if (name != "" && quantity != "" && price != "" && description != "") {
+        let newProduct = new Product(name, selectedCatrgory, quantity, price, description,
+            imageAddress,);
+        //add new Product to ProductLst localStorage
+        addProduct(newProduct);
+        showProductList(getProductList());
+        clearInputData();
+        showAlert("success", "Added Successfully!");
+    } else {
+        showAlert("error", "Please enter name, quantity, price and description for new product!");
+    }
+
 
 }
 
@@ -169,11 +166,7 @@ function editProduct() {
 }
 
 function deleteProducts() {
-<<<<<<< Updated upstream
     //debugger
-=======
-    debugger
->>>>>>> Stashed changes
     let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
     if (document.querySelector("#deleteProd").value === "Delete") {
         showAlert("info", "Please choose products to delete!");
@@ -185,7 +178,6 @@ function deleteProducts() {
         for (let checkbox of allCheckboxes) {
             checkbox.disabled = false;
         }
-<<<<<<< Updated upstream
 
     } else {
         let checkedProductIds = [];
@@ -203,6 +195,7 @@ function deleteProducts() {
             for (let productId of checkedProductIds) {
                 removeProduct(productId);
             }
+            showAlert("success", "Deleted successfully!");
             clearInputData();
             showProductList(getProductList());
         } else {
@@ -217,54 +210,38 @@ function filterProducts() {
     let name = document.querySelector("#productName").value.trim();
     let quantity = document.querySelector("#quantity").value.trim();
     let price = document.querySelector("#price").value.trim();
-    price = price.includes('$')? price: price + "$";
+    console.log("price is ", price);
+    price = price.includes('$') ? price : price + "$";
+    console.log("price is ", price);
     let description = document.querySelector("#productDes").value.trim();
     let options = document.querySelectorAll("option");
     let selectedCategory;
-    for ( let opt of options) {
-        if(opt.selected) {
+
+    for (let opt of options) {
+        if (opt.selected) {
             selectedCategory = opt.innerHTML;
             break;
         }
     }
     let productList = getProductList();
-    let result = productList.filter(product => {
-        (product.name.includes(name) ||
-        product.description.includes(description) ||
-        product.category === selectedCategory||
-        product.price === price ||
-        product.quantity === quantity) ? true: false;
+    let result = [];
+    debugger
+    for (let product of productList) {
+        console.log(product.price);
+        let nameCondition = (name === "") ? true : product.name.includes(name);
+        let quantityCondition = quantity === "" ? true : product.quantity === quantity;
+        let priceCondition = price === "" ? true : product.price === price;
+        let desCondition = description === "" ? true : product.description.includes(description);
+        if (product.category === selectedCategory && nameCondition && quantityCondition && priceCondition && desCondition) {
+            result.push(product);
+        }
 
-    });
-    showProductList(result);
-=======
->>>>>>> Stashed changes
-
+    }
+    if (result.length > 0) {
+        showProductList(result);
     } else {
-        let checkedProductIds = [];
-        let rows = document.getElementsByClassName("myRow");
-        for (let i = 0; i < rows.length; i++) {
-            let cols = rows[i].getElementsByTagName("td");
-            console.log("col[0] is ", cols[0]);
-            let checkbox = cols[0].children;
-            if (checkbox[0].checked === true) {
-                checkedProductIds.push(cols[1].innerHTML);
-            }
-        }
-        //  localStorage.setItem("checkedProductIds", JSON.stringify(checkedProductIds));
-        // let checkedProductIds = JSON.parse( localStorage.getItem("checkedProductIds") );
-        // console.log( "checkedProductIds is ",checkedProductIds)
-        if (confirm("Do you want to delete " + checkedProductIds.length +
-            " products?")) {
-            for (let productId of checkedProductIds) {
-                removeProduct(productId);
-            }
-            clearInputData();
-            showProductList(getProductList());
-        } else {
-            clearInputData();
-
-        }
+        showAlert("info", "No product found.");
+        showProductList(result);
     }
 }
 
@@ -275,9 +252,9 @@ function clearInputData() {
     document.querySelector("#imgAddress").value = "";
     document.querySelector("#productDes").value = "";
     document.querySelector("#editProd").value = "Edit";
+    document.querySelector("#deleteProd").value = "Delete";
     document.querySelector("#editProd").disabled = false;
     document.querySelector("#addProd").disabled = false;
-    document.querySelector("#deleteProd").value = "Delete";
     document.querySelector("#deleteProd").disabled = false;
     document.querySelector("#filterProd").disabled = false;
     let allCheckboxes = document.querySelectorAll("input[name=myCheck]");
