@@ -1,4 +1,5 @@
 import { getCurrentUser } from "./user.js" 
+import { totalItemsInCart } from "./cart.js"
 
 window.addEventListener("load", function () {
   fetch("./nav.html")
@@ -19,6 +20,8 @@ window.addEventListener("load", function () {
      if (getCurrentUser() != null){
         document.getElementById('login').innerHTML = 'Hello ' + getCurrentUser().fname;
         document.getElementById('login').href = '#';
+        let totalCartItems = totalItemsInCart();
+      document.getElementById("total-cart-items").innerHTML = totalCartItems;
      }
   }, 1000);
 });

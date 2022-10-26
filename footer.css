@@ -5,7 +5,7 @@
 /* Main Footer */
 footer .main-footer {
   padding: 20px 0;
-  background: #252525;
+  background: lightgray;
 }
 footer ul {
   padding-left: 0;
@@ -14,7 +14,8 @@ footer ul {
 
 /* Copy Right Footer */
 .footer-copyright {
-  background: #222;
+  background: lightgray;
+ 
   padding: 5px 0;
 }
 .footer-copyright .logo {
@@ -37,14 +38,14 @@ footer ul {
   padding: 0 8px;
 }
 .footer-copyright nav ul li a {
-  color: #969696;
+  color: #222;
 }
 .footer-copyright nav ul li:first-child {
   border: medium none;
   padding-left: 0;
 }
 .footer-copyright p {
-  color: #969696;
+  color: #222;
   margin: 2px 0 0;
 }
 
@@ -66,12 +67,12 @@ footer.transparent .footer-copyright {
 }
 
 /* Footer light */
-footer.light .footer-top {
+/* footer.light .footer-top {
   background: #f9f9f9;
 }
 footer.light .main-footer {
   background: #f9f9f9;
-}
+} */
 footer.light .footer-copyright {
   background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3);
 }
@@ -151,7 +152,7 @@ footer.light .footer-copyright {
 .typo-light div,
 .typo-light span,
 .typo-light small {
-  color: #fff;
+  color: #222;
 }
 
 ul.social-footer2 {

@@ -1,5 +1,5 @@
 import { removeProductFromCart } from "./products.js";
-import { getCartProducts, addToCart, removeFromCart } from "./cart.js"
+import { getCartProducts, addToCart, removeFromCart, totalItemsInCart } from "./cart.js"
 import { getCurrentUser } from "./user.js"
 
 window.onload = function () {
@@ -68,6 +68,8 @@ function setRemoveFromCartOnClick(removeFromCartBtnId, productId) {
     if(cartItemsForCurrentUser && cartItemsForCurrentUser.cartProducts){
       let getPriceAndCount = appendProducts(cartItemsForCurrentUser.cartProducts);
       getCartDetails(getPriceAndCount);
+      let totalCartItems = totalItemsInCart();
+      document.getElementById("total-cart-items").innerHTML = totalCartItems;
     }
    
   };

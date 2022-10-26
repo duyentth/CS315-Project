@@ -1,13 +1,19 @@
 import { Product, initData, getProductList, addProduct, removeProduct } from "./products.js";
-import { addToCart } from "./cart.js";
+import { addToCart, totalItemsInCart } from "./cart.js";
 
 function setAddToCartOnClick(productId) {
     let addToCartBtn = document.getElementById("add-to-cart");
     addToCartBtn.onclick = function(){
         let quantity = Number(document.getElementById("quantity").value);
-        addToCart(productId, quantity);
-        alert("Product Added to Cart");
-    }
+        let response = addToCart(productId, quantity);
+        if(response === "nouserfound"){
+            alert("You have not logged in yet. Please login and come back.")
+            return;
+        }else
+            alert("Product Added to Cart");
+            let totalCartItems = totalItemsInCart();
+            document.getElementById("total-cart-items").innerHTML = totalCartItems;
+        }
 }
 
 function getSelectedProductId(){

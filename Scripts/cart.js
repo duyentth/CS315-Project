@@ -16,7 +16,18 @@ export class Cart {
   }
 }
 
-
+export function totalItemsInCart(){
+    let itemsInCart = getCartProducts();
+    let currentUser = getCurrentUser();
+    let cartItemsForCurrentUser = itemsInCart[currentUser.email];
+    if(!cartItemsForCurrentUser) return 0;
+    let cartProducts = cartItemsForCurrentUser["cartProducts"];
+    let totalCount = 0;
+    for(let product in cartProducts){
+        totalCount = totalCount + cartProducts[product]["quantity"];
+    }
+    return totalCount;
+}
 
 export let getCartProducts = () => {
   return JSON.parse(localStorage.getItem("cart"));

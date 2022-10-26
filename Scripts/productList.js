@@ -6,7 +6,7 @@ import {
   filterRating
 } from "./products.js";
 
-import { addToCart } from "./cart.js"
+import { addToCart, totalItemsInCart } from "./cart.js"
 
 window.onload = function () {
   let url_string = window.location.href;
@@ -73,8 +73,14 @@ function setFilterOnClick({searchBoxValue, category, tag}) {
 function setAddToCartOnClick(addToCartBtnId, productId) {
   let addToCartBtn = document.getElementById(addToCartBtnId);
   addToCartBtn.onclick = function () {
-    addToCart(productId);
-    alert("Product Added to Cart");
+    let response = addToCart(productId);
+    if(response === "nouserfound"){
+      alert("You have not logged in yet. Please login and come back.")
+      return;
+    }else
+      alert("Product Added to Cart");
+      let totalCartItems = totalItemsInCart();
+      document.getElementById("total-cart-items").innerHTML = totalCartItems;
   };
 }
 
