@@ -47,3 +47,17 @@ export let getUsers = () => {
 
     return users;
 }
+
+export let addCurrentUser = (email) => {
+    localStorage.setItem("currentUserEmail", email);
+}
+
+export let getCurrentUser = function(){
+    let email = localStorage.getItem("currentUserEmail");
+    if (email == null) return null;
+    var users = getUsers();
+    for(var i=0; i<users.length;i++)
+        if (users[i].email == email)
+            return users[i];
+    return null;
+}

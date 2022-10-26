@@ -1,4 +1,4 @@
-import { User, getUsers } from "./user.js";
+import { User, getUsers, addCurrentUser } from "./user.js";
 
 
 //page load
@@ -7,8 +7,6 @@ document.querySelector("#userEmail").focus();
 let userEmail = document.querySelector("#userEmail");
 userEmail.addEventListener("focusout",validateEmail );
 userEmail.addEventListener("keydown",clearErrorMsg);
-//let params = (new URL(document.location)).searchParams;
-//let em = params.get("email");
 
 function validateEmail(){
     let email = userEmail.value.trim();
@@ -38,6 +36,7 @@ function login(event) {
     let password = document.querySelector("#userPassword").value.trim();
     let isMatched = false;
     let isManger = false;
+    
     //debugger
     let users = getUsers();
     for (let user of users) {
@@ -55,7 +54,7 @@ function login(event) {
         document.querySelector("#userEmail").focus();
         return;
     }
-    document.cookie = "userEmail=" + email;
+    addCurrentUser(email);
     if (isManger === true) {
         
         document.querySelector(".loginForm").setAttribute("action", "./inventory.html");

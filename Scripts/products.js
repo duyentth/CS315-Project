@@ -11,6 +11,10 @@ export class Product {
   }
 }
 export let initData = () => {
+
+  if (localStorage.getItem("productList") != null) return;
+
+
   let products = [];
   for (let i = 1; i <= 20; i++) {   
       let  now =  Date.now() + i * 10000; 
