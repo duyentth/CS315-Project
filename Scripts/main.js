@@ -19,12 +19,15 @@ function appendBestDeals() {
     bestDealsDiv.insertAdjacentHTML(
       "beforeend",
       `<div class="carousel-item ${active}">
-        <div class="card">
-          <img class="card-img-top" src="${bestDealItem.imgAddress}" alt="Card image cap" style="height: 15em">
-          <div class="card-body">
-            <p class="card-text">${bestDealItem.description}</p>
+        <a href="productDetails.html?id=${bestDealItem.id}">
+          <div class="card" style="height: 16rem; text-align:center;">
+            <img class="card-img-top" src="${bestDealItem.imgAddress}" alt="Card image cap" style="height: 100%; object-fit:cover;">
+            <div class="card-body">
+              <h5 class="card-title">${bestDealItem.name}</h5>
+              <p class="card-text">${bestDealItem.description}</p>
+            </div>
           </div>
-        </div>
+         </a>
       </div>`
     );
     active = "";
@@ -40,12 +43,17 @@ function appendNewArrival() {
     newArrivalsItemsDiv.insertAdjacentHTML(
       "beforeend",
       `<div class="carousel-item ${active}">
-        <div class="card" >
-          <img class="card-img-top" src="${newArrival.imgAddress}" alt="Card image cap" style="height: 15em">
-          <div class="card-body">
-            <p class="card-text">${newArrival.description}</p>
+        <a href="productDetails.html?id=${newArrival.id}">
+          <div class="card" style="height: 16rem; text-align:center;">
+            <img class="card-img-top" src="${newArrival.imgAddress}" alt="Card image cap" style="height: 100%; object-fit:cover;">
+            <div class="card-body">
+              <h5 class="card-title">
+                ${newArrival.name}
+              </h5>
+              <p class="card-text">${newArrival.description}</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>`
     );
     active = "";
