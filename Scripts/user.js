@@ -7,9 +7,7 @@ export class User {
         this.address = address;
         this.password = password;
         this.isManager = isManager;
-    }
-    
-
+    }    
 }
 
 export let initData = function () {
