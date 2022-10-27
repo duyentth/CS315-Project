@@ -14,6 +14,8 @@ window.onload = function () {
   appendBestDeals();
   appendNewArrival();
   appendBestSeller();
+
+  console.log('xx', localStorage.getItem('currentUserEmail'));
 };
 
 function appendBestDeals() {
