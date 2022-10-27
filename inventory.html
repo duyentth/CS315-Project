@@ -24,13 +24,27 @@
 
         
     </style>
+    <script>
+        function signOut() {
+            localStorage.setItem("currentUserEmail", null);
+            window.location.href = './login.html';
+        }
+        </script>
 </head>
 
 <body>
+    
     <div class="container">
+
         <div>
+            <input type="button" value="Sign out" onclick="return signOut();"/>
             <form id="fnc-from" action="" method="post">
-                <h1>Inventory</h1>
+                <div style="display: flex; gap: 10px">  
+                    <h1 >Inventory</h1>
+                    
+                </div>
+                
+                
                 <br>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-md-6 col-sm-12 mb-4">
@@ -115,8 +129,9 @@
                         <input id="addProd" class="btn btn-primary btn-sm" type="button"  value="Add" />
                         <input id="editProd"  class="btn btn-primary  btn-sm" type="button"  value="Edit" />
                         <input id="deleteProd"  class="btn btn-primary  btn-sm" type="button"  value="Delete" />
-                        <input id="filterProd" disabled class="btn btn-primary  btn-sm" type="button"  value="Filter" />
+                        <input id="filterProd" class="btn btn-primary  btn-sm" type="button"  value="Filter" />
                         <input id="cancelbtn"  class="btn btn-primary  btn-sm" type="button"  value="Cancel" />
+                        
                     </div>
                     
 
@@ -151,6 +166,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
     <script type="module" src="./Scripts/inventory.js"></script>
+    
 </body>
 
 </html>

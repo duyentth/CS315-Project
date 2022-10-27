@@ -18,10 +18,15 @@ window.addEventListener("load", function () {
   document.body.append(script);
   setTimeout(function(){
      if (getCurrentUser() != null){
+        if (getCurrentUser().isManager) 
+          window.location.href = './inventory.html';
         document.getElementById('login').innerHTML = 'Hello ' + getCurrentUser().fname;
         document.getElementById('login').href = '#';
         let totalCartItems = totalItemsInCart();
       document.getElementById("total-cart-items").innerHTML = totalCartItems;
+      document.getElementById('logout').style.display = '';
      }
   }, 1000);
 });
+
+

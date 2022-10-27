@@ -2,6 +2,7 @@ import { User, getUsers, addCurrentUser } from "./user.js";
 
 
 //page load
+addCurrentUser(null);
 document.querySelector(".login").addEventListener("click", login);
 document.querySelector("#userEmail").focus();
 let userEmail = document.querySelector("#userEmail");

@@ -1,4 +1,6 @@
 import { Product, initData, getProductList, addProduct, removeProduct } from "./products.js";
+import {getCurrentUser} from './user.js';
+
 window.onload = () => {
     //localStorage.setItem("productList", "");
     initData();
@@ -16,6 +18,11 @@ window.onload = () => {
     deleteBtn.addEventListener("click", deleteProducts);
     cancelbtn.addEventListener("click", clearInputData);
     filterBtn.addEventListener("click", filterProducts);
+
+    if (getCurrentUser() == null)
+        location.href = './login.html';
+    if (getCurrentUser().isManager == false)
+        location.href = './main.html';
 
 }
 
@@ -209,13 +216,10 @@ function filterProducts() {
     let name = document.querySelector("#productName").value.trim();
     let quantity = document.querySelector("#quantity").value.trim();
     let price = document.querySelector("#price").value.trim();
-    console.log("price is ", price);
     price = price.includes('$') ? price : price + "$";
-    console.log("price is ", price);
     let description = document.querySelector("#productDes").value.trim();
     let options = document.querySelectorAll("option");
     let selectedCategory;
-
     for (let opt of options) {
         if (opt.selected) {
             selectedCategory = opt.innerHTML;
@@ -229,7 +233,7 @@ function filterProducts() {
         console.log(product.price);
         let nameCondition = (name === "") ? true : product.name.includes(name);
         let quantityCondition = quantity === "" ? true : product.quantity === quantity;
-        let priceCondition = price === "" ? true : product.price === price;
+        let priceCondition = (price === "$") ? true : product.price === price;
         let desCondition = description === "" ? true : product.description.includes(description);
         if (product.category === selectedCategory && nameCondition && quantityCondition && priceCondition && desCondition) {
             result.push(product);
@@ -261,6 +265,7 @@ function clearInputData() {
         checkbox.disabled = true;
         checkbox.checked = false;
     }
+    showProductList(getProductList());
 }
 function fillInData(name, category, quantity, price, image, description) {
     document.querySelector("#productName").value = name;
@@ -276,4 +281,5 @@ function fillInData(name, category, quantity, price, image, description) {
         }
     }
 }
+
 
