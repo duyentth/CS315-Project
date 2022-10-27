@@ -79,8 +79,7 @@ export let getProductListByFilter = ({ searchBoxValue, category }) => {
           -1;
     }
     if (category) {
-      find = find ||
-        product.category.toLowerCase() === category.toLowerCase();
+      find = product.category.toLowerCase() === category.toLowerCase();
     }
     return find;
   });
@@ -100,9 +99,9 @@ export function getNewArrivalsItems() {
 function sortByDateCreated(products) {
   products.sort(function (product1, product2) {
     if (product1.dateCreated < product2.dateCreated) {
-      return -1;
-    } else if (product1.dateCreated > product2.dateCreated) {
       return 1;
+    } else if (product1.dateCreated > product2.dateCreated) {
+      return -1;
     } else return 0;
   });
 }
@@ -121,31 +120,7 @@ export function getProductById(productId) {
   });
 }
 
-export function addProductToCart(productId) {
-  let productToAddInCart = getProductById(productId);
-  let cartProducts = getCartProducts();
-  cartProducts.push(productToAddInCart);
-  let cartProducts_json = JSON.stringify(cartProducts);
-  localStorage.setItem("cart", cartProducts_json);
-}
-
-export function getCartProductIndexById(productId) {
-  return getCartProducts().findIndex(function (product) {
-    return productId === product.id;
-  });
-}
-
-export function removeProductFromCart(productId) {
-  let productIndex = getCartProductIndexById(productId);
-  console.log(productIndex);
-  let cartProducts = getCartProducts();
-  cartProducts.splice(productIndex, 1);
-  let cartProducts_json = JSON.stringify(cartProducts);
-  localStorage.setItem("cart", cartProducts_json);
-}
-
 export function filterRating(){
   let products = getProductList();
-  console.log(products);
   return products.filter((item) => item.rating >= 4);
 }
