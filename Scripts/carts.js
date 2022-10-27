@@ -1,4 +1,3 @@
-import { removeProductFromCart } from "./products.js";
 import { getCartProducts, addToCart, removeFromCart, totalItemsInCart } from "./cart.js"
 import { getCurrentUser } from "./user.js"
 
